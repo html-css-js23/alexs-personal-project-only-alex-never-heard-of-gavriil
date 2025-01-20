@@ -6,6 +6,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+let readyPurchaseR2S6 = 0
+let col = 0
+let row = 0
 let nobalance = ""
 let readyPurchaseR1S1 = 0
 let mySprite: Sprite = null
@@ -40,11 +43,43 @@ forever(function () {
                 Money = Money - 5000
                 readyPurchaseR1S1 = 0
                 nobalance = "Current Balance: " + Money
+                row = 2
+                col = 2
+                for (let index = 0; index <= 5; index++) {
+                    if (index == 3) {
+                        row = 3
+                        col = 2
+                    }
+                    tiles.setTileAt(tiles.getTileLocation(col, row), assets.tile`myTile11`)
+                    col += 1
+                }
                 game.splash("Purchased!", nobalance)
             } else {
                 nobalance = "Current Balance: " + Money
                 game.splash("Not enough balance.", nobalance)
                 readyPurchaseR1S1 = 0
+            }
+        }
+        if (readyPurchaseR2S6 == 1) {
+            if (Money >= 5000) {
+                Money = Money - 5000
+                readyPurchaseR2S6 = 0
+                nobalance = "Current Balance: " + Money
+                row = 2
+                col = 2
+                for (let index = 0; index <= 5; index++) {
+                    if (index == 3) {
+                        row = 3
+                        col = 2
+                    }
+                    tiles.setTileAt(tiles.getTileLocation(col, row), assets.tile`myTile11`)
+                    col += 1
+                }
+                game.splash("Purchased!", nobalance)
+            } else {
+                nobalance = "Current Balance: " + Money
+                game.splash("Not enough balance.", nobalance)
+                readyPurchaseR2S6 = 0
             }
         }
     }
